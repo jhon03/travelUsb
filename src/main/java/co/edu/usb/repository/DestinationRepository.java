@@ -3,7 +3,6 @@ package co.edu.usb.repository;
 import java.sql.SQLException;
 import java.util.List;
 
-import co.edu.usb.DTO.DestinationDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import co.edu.usb.domain.Destination;

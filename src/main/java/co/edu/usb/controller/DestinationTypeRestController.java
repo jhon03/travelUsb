@@ -3,7 +3,6 @@ package co.edu.usb.controller;
 import co.edu.usb.DTO.DestinationTypeDTO;
 import co.edu.usb.Service.DestynationTypeService;
 import co.edu.usb.domain.DestinationType;
-import jdk.jshell.Snippet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

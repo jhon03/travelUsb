@@ -19,8 +19,13 @@ public class DestynationServiceImpl implements DestynationService {
     @Autowired
     private DestinationRepository destinationRepository;
 
-  
 
+    /**
+     *
+     * @param destinationDTO
+     * @return Destination
+     * @throws Exception
+     */
     @Override
     public Destination guardarDestination(DestinationDTO destinationDTO) throws Exception {
 
@@ -70,6 +75,8 @@ public class DestynationServiceImpl implements DestynationService {
 
         Destination destination = null;
         DestinationType destinationType = null;
+
+        // se busca el destino a actualizar
         destination = findById(destinationDTO.getIdDest());
 
         destination.setCode(destinationDTO.getCode());
@@ -107,6 +114,15 @@ public class DestynationServiceImpl implements DestynationService {
             throw new Exception("El destino con id:  " + idDest + "no existe");
         }
         return destinationRepository.findById(idDest).get();
+    }
+
+    @Override
+    public void DestinationDelete(Integer idDest) throws Exception {
+
+      if(!destinationRepository.findById(idDest).isPresent() ) {
+            throw new Exception("El destino con id:  " + idDest + "no existe");
+        }
+        destinationRepository.deleteById(idDest);
     }
 
 

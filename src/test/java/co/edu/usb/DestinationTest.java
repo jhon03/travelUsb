@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Rollback(false)
 class DestinationTest {
 
-
+   Destination destination = null;
 	@Autowired
 	private DestinationRepository destinationRepository;
 
@@ -92,9 +92,9 @@ class DestinationTest {
 		try {
 			DestinationDTO destinationDTO = new DestinationDTO();
 
-			destinationDTO.setCode("AMZ");
-			destinationDTO.setName("AMAZONAS");
-			destinationDTO.setDescription("NATURALEZA A OTRO NIVEL");
+			destinationDTO.setCode("CAL");
+			destinationDTO.setName("CALI");
+			destinationDTO.setDescription("CIUDAD DE LA SALSA");
 			destinationDTO.setLand("S");
 			destinationDTO.setAir("N");
 			destinationDTO.setSea("N");
@@ -104,11 +104,12 @@ class DestinationTest {
 
 			destinationDTO.setStatus("A");
 
-			destinationDTO.setCodeDestinationType("BOSQU");
-			destinationDTO.setNameDestinationType("DESIERTO Y SOL");
+			destinationDTO.setCodeDestinationType("CULTU");
+			destinationDTO.setNameDestinationType("CULTURAL");
 
 			destynationService.guardarDestination(destinationDTO);
 
+			System.out.println("destino creado sactisfactoriamente");
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
@@ -116,8 +117,61 @@ class DestinationTest {
 	}
 		@Test
 	    @Transactional
-	   void updateDestino(){
+	   void updateDestino() {
 
+			Destination destination = null;
+
+
+			try {
+				DestinationDTO destinationDTO = new DestinationDTO();
+
+				destinationDTO.setIdDest(4);
+				destinationDTO.setCode("AMZ");
+				destinationDTO.setName("AMAZONAS");
+				destinationDTO.setDescription("PURE NATURE");
+				destinationDTO.setLand("S");
+				destinationDTO.setAir("N");
+				destinationDTO.setSea("N");
+				destinationDTO.setDateCreated(new Date());
+
+				destinationDTO.setCreatorUser("JHONH");
+
+				destinationDTO.setStatus("A");
+
+				destinationDTO.setCodeDestinationType("BOSQU");
+				destinationDTO.setNameDestinationType("NATURALEZA, BOSQUE Y AIRE");
+
+				destynationService.updateDestination(destinationDTO);
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+        @Test
+	    @Transactional
+		void destinationDelete() {
+
+
+			try {
+
+				destynationService.DestinationDelete(4);
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+
+			}
+		}
+		@Test
+	    @Transactional
+	void searchDestinationForId(){
+
+		try {
+			destination = destynationService.findById(6);
+
+			System.out.println(destination.getName());
+			}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
 		}
 	}
 

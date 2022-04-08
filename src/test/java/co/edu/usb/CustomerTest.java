@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.usb.domain.Customer;
@@ -20,12 +21,14 @@ import co.edu.usb.repository.CustomerRepository;
 
 
 @SpringBootTest
+@Rollback(false)
 class CustomerTest {
 	
 	@Autowired
 	private CustomerRepository customerRepository; 
 
 	@Test
+	@Transactional
 	void searchCustomerByStatusPageAndOrderIdNumber() {
 		
 		Page<Customer> pageCustomer = null;
@@ -45,6 +48,7 @@ class CustomerTest {
 		}
 	}
 		@Test
+		@Transactional
 		void searchCustomerByEmailIgnoreMayMin() throws SQLException {
 			
 		
@@ -56,7 +60,8 @@ class CustomerTest {
 		}
 
 @Test
-void searchCustomerIdNumberUserLike() throws SQLException{
+@Transactional
+void searchCustomerIdNumberUserLike() {
 	
 	Customer customer = customerRepository.findByIdentificationNumberLike("%11124697%");
 	
@@ -67,6 +72,7 @@ void searchCustomerIdNumberUserLike() throws SQLException{
  *  ignorando Mayúsculas y minúsculas, 
  *   usando LIKE.*/
 @Test
+@Transactional
 void searchCustomerNameIgnoreCaseLike() throws SQLException{
 	
 	try {
@@ -88,6 +94,7 @@ void searchCustomerNameIgnoreCaseLike() throws SQLException{
  */
 
 @Test
+@Transactional
 void searchCustomerForRangeDate() throws SQLException{
 	
 	
@@ -109,6 +116,7 @@ void searchCustomerForRangeDate() throws SQLException{
 	}
 }
 	@Test
+	@Transactional
 	void searchTotalCustomerForStatus() {
 		
 		try {
@@ -139,6 +147,7 @@ void searchCustomerForRangeDate() throws SQLException{
 		
 	}
 		@Test
+		@Transactional
 		void searchCustomerForApellidos() 	{
 			
 			try {
@@ -152,7 +161,8 @@ void searchCustomerForRangeDate() throws SQLException{
 				// TODO: handle exception
 			}
 		}
-@Test			
+@Test
+@Transactional
 void imprimirNumeros() {
 	
      

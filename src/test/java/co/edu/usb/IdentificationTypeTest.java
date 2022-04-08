@@ -11,13 +11,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.usb.domain.Customer;
 import co.edu.usb.domain.IdentificationType;
 import co.edu.usb.repository.IdentificationTypeRepository;
 
 @SpringBootTest
+@Rollback(false)
 class IdentificationTypeTest {
 
 	@Autowired
@@ -43,6 +44,7 @@ class IdentificationTypeTest {
 		}
 	}
 		@Test
+		@Transactional
 		void searchIdentificationTypeForCodeAndStatus() throws SQLException {
 			
 		try {

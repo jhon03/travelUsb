@@ -11,4 +11,6 @@ public interface DestinationTypeRepository extends JpaRepository<DestinationType
 
 	
 	public List<DestinationType> findByStatusOrderByCodeAsc (String status) throws SQLException;
+
+	public DestinationType findByCodeAndStatus (String Code, String Status) throws Exception;
 }

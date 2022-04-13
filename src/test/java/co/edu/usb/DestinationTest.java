@@ -8,6 +8,7 @@ import java.util.List;
 import co.edu.usb.DTO.DestinationDTO;
 import co.edu.usb.Service.DestynationService;
 
+import co.edu.usb.Utilities.Constantes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -92,20 +93,22 @@ class DestinationTest {
 		try {
 			DestinationDTO destinationDTO = new DestinationDTO();
 
-			destinationDTO.setCode("CAL");
-			destinationDTO.setName("CALI");
-			destinationDTO.setDescription("CIUDAD DE LA SALSA");
-			destinationDTO.setLand("S");
-			destinationDTO.setAir("N");
+			destinationDTO.setCode("MEX");
+			destinationDTO.setName("MEXICO");
+			destinationDTO.setDescription("PLAYA, CULTURA Y BRISA");
+			destinationDTO.setLand("N");
+			destinationDTO.setAir("S");
 			destinationDTO.setSea("N");
 			destinationDTO.setDateCreated(new Date());
 
+
 			destinationDTO.setCreatorUser("JHONH");
+			destinationDTO.setModifierUser("CESARL");
 
-			destinationDTO.setStatus("A");
+			destinationDTO.setStatus(Constantes.Activo);
 
-			destinationDTO.setCodeDestinationType("CULTU");
-			destinationDTO.setNameDestinationType("CULTURAL");
+			destinationDTO.setCodeDestinationType("PLAYA");
+			destinationDTO.setNameDestinationType("PLAYA Y MAR");
 
 			destynationService.guardarDestination(destinationDTO);
 
@@ -125,17 +128,17 @@ class DestinationTest {
 			try {
 				DestinationDTO destinationDTO = new DestinationDTO();
 
-				destinationDTO.setIdDest(4);
-				destinationDTO.setCode("AMZ");
-				destinationDTO.setName("AMAZONAS");
+				destinationDTO.setIdDest(7);
+				destinationDTO.setCode("ARM");
+				destinationDTO.setName("ARMENIA");
 				destinationDTO.setDescription("PURE NATURE");
-				destinationDTO.setLand("S");
+				destinationDTO.setLand("SS");
 				destinationDTO.setAir("N");
 				destinationDTO.setSea("N");
 				destinationDTO.setDateCreated(new Date());
-
+				destinationDTO.setDateModified(new Date());
 				destinationDTO.setCreatorUser("JHONH");
-
+                destinationDTO.setModifierUser("JHONH");
 				destinationDTO.setStatus("A");
 
 				destinationDTO.setCodeDestinationType("BOSQU");
@@ -154,7 +157,7 @@ class DestinationTest {
 
 			try {
 
-				destynationService.DestinationDelete(4);
+				destynationService.DestinationDelete(10);
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -163,15 +166,25 @@ class DestinationTest {
 		}
 		@Test
 	    @Transactional
-	void searchDestinationForId(){
+	void searchDestinationForId() {
 
-		try {
-			destination = destynationService.findById(6);
+			try {
+				destination = destynationService.findById(6);
 
-			System.out.println(destination.getName());
-			}catch (Exception e){
-			System.out.println(e.getMessage());
+				System.out.println(destination.getName());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 		}
+		@Test
+		@Transactional
+		void buscarPorCode(){
+			try {
+				destination = destynationService.findByCode(" ");
+				System.out.println(destination.getName());
+			}catch (Exception e){
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 

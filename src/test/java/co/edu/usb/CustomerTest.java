@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import co.edu.usb.Service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +26,10 @@ import co.edu.usb.repository.CustomerRepository;
 class CustomerTest {
 	
 	@Autowired
-	private CustomerRepository customerRepository; 
+	private CustomerRepository customerRepository;
+
+	@Autowired
+	private CustomerService customerService;
 
 	@Test
 	@Transactional
@@ -36,7 +40,7 @@ class CustomerTest {
 		try {
 			Pageable pageable = PageRequest.of(0, 3);
 
-			pageCustomer = customerRepository.findByStatusOrderByIdentificationNumberAsc("A", pageable);
+			pageCustomer = customerService.findByStatusOrderByIdentificationNumberAsc("A", pageable);
 			for (Customer customer : pageCustomer) {
 
 				System.out.println(customer.getName());

@@ -23,7 +23,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	 * 3. Consultar a un cliente por correo electrónico. Esta consulta debe ignorar
 	 * las mayúsculas y minúsculas.
 	 */
-	public Customer findByEmailIgnoreCase(String email);
+	public Customer findByEmailIgnoreCase(String email) ;
 
 	/*
 	 * 4.Consultar cliente por número de identificación, usando LIKE

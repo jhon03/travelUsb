@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import co.edu.usb.Service.CustomerService;
+import co.edu.usb.Utils.Constantes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -53,23 +54,31 @@ class CustomerTest {
 	}
 		@Test
 		@Transactional
-		void searchCustomerByEmailIgnoreMayMin() throws SQLException {
+		void searchCustomerByEmailIgnoreMayMin() throws Exception {
 			
-		
-			Customer customer = customerRepository.findByEmailIgnoreCase("HOYOSB90@GMAIL.COM");
-			
+		try {
+			Customer customer = customerService.findByEmailIgnoreCase("PASINNOVATION@GMAIL.COM");
+			System.out.println(customer.getName());
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
 
-		            System.out.println(customer.getName());
 		
 		}
 
 @Test
 @Transactional
-void searchCustomerIdNumberUserLike() {
-	
-	Customer customer = customerRepository.findByIdentificationNumberLike("%11124697%");
-	
-	System.out.println(customer.getFirstName());
+void searchCustomerIdNumberUserLike() throws Exception{
+
+		try{
+			Customer customer = customerService.findByIdentificationNumberLike("6332553");
+
+			System.out.println(customer.getFirstName());
+		}catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+
 }
 
 /* 5. Consultar al cliente por nombre,
@@ -77,10 +86,10 @@ void searchCustomerIdNumberUserLike() {
  *   usando LIKE.*/
 @Test
 @Transactional
-void searchCustomerNameIgnoreCaseLike() throws SQLException{
+void searchCustomerNameIgnoreCaseLike() throws Exception{
 	
 	try {
-		Customer customer = customerRepository.findByNameIgnoreCaseLike("Jhon Anderson");
+		Customer customer = customerService.findByNameIgnoreCaseLike("Alvaro");
 		System.out.println(customer.getFirstName());
 		
 	} catch (Exception e) {
@@ -99,16 +108,16 @@ void searchCustomerNameIgnoreCaseLike() throws SQLException{
 
 @Test
 @Transactional
-void searchCustomerForRangeDate() throws SQLException{
+void searchCustomerForRangeDate() throws Exception{
 	
 	
-	Calendar fechaInicio = new GregorianCalendar(1991, 5, 30);
+	Calendar fechaInicio = new GregorianCalendar(2018, 4, 15);
 
-	Calendar fechaFin = new GregorianCalendar(2016, 12, 8);
+	Calendar fechaFin = new GregorianCalendar(2019, 12, 8);
 	
 	try {
 		
-		List<Customer> lstCliente = customerRepository.findBybirthDateBetween(fechaInicio.getTime(),
+		List<Customer> lstCliente = customerService.findBybirthDateBetween(fechaInicio.getTime(),
 				fechaFin.getTime());
 
 		for (Customer cliente : lstCliente) {
@@ -121,10 +130,10 @@ void searchCustomerForRangeDate() throws SQLException{
 }
 	@Test
 	@Transactional
-	void searchTotalCustomerForStatus() {
+	void searchTotalCustomerForStatus() throws Exception{
 		
 		try {
-			Long lstCustomer = customerRepository.countAndfindByStatus("A");
+			Long lstCustomer = customerService.countAndfindByStatus(Constantes.Activo);
 
 			System.out.println(lstCustomer);
 		} catch (Exception e) {
@@ -133,13 +142,13 @@ void searchCustomerForRangeDate() throws SQLException{
 	}
 	@Test
 	@Transactional
-	void searchCustomerForIdentificationTypePageable() {
+	void searchCustomerForIdentificationTypePageable() throws Exception{
 		Page<Customer> pageCustomer;
 		
 		try {
 			Pageable pageable = PageRequest.of(0, 3);
 
-			pageCustomer = customerRepository.findByIdentificationType_Code("CE", pageable);
+			pageCustomer = customerService.findByIdentificationType_Code("CC", pageable);
 
 			for (Customer customer : pageCustomer) {
 				System.out.println(customer.getName());
@@ -152,17 +161,18 @@ void searchCustomerForRangeDate() throws SQLException{
 	}
 		@Test
 		@Transactional
-		void searchCustomerForApellidos() 	{
+		void searchCustomerForApellidos() throws Exception{
 			
 			try {
 
-				List<Customer> customer = customerRepository.findByFirstNameAndSecondName("Hoyos", "Batero");
+				List<Customer> customer = customerService.findByFirstNameAndSecondName("Hoyos", "Batero");
 
 				for (Customer customerx : customer) {
 					System.out.println(customerx.getName());
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
+				System.out.println(e.getMessage());
 			}
 		}
 @Test

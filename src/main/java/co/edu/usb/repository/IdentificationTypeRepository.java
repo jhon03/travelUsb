@@ -15,7 +15,7 @@ public interface IdentificationTypeRepository extends JpaRepository<Identificati
 	 * por estado ordenados alfabéticamente.
 	 */
 	
-	public List<IdentificationType> findByStatusOrderByCodeAsc (String status)throws SQLException;
+	public List<IdentificationType> findByStatusOrderByCodeAsc (String status)throws Exception;
 	
 	/*
 	 * 7.    Consultar tipo de identificación por código y estado.

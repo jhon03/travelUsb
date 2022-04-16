@@ -8,7 +8,6 @@ import java.util.List;
 import co.edu.usb.DTO.DestinationDTO;
 import co.edu.usb.Service.DestynationService;
 
-import co.edu.usb.Utilities.Constantes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -105,7 +104,7 @@ class DestinationTest {
 			destinationDTO.setCreatorUser("JHONH");
 			destinationDTO.setModifierUser("CESARL");
 
-			destinationDTO.setStatus(Constantes.Activo);
+			destinationDTO.setStatus("A");
 
 			destinationDTO.setCodeDestinationType("PLAYA");
 			destinationDTO.setNameDestinationType("PLAYA Y MAR");
@@ -157,8 +156,8 @@ class DestinationTest {
 
 			try {
 
-				destynationService.DestinationDelete(10);
-
+				destynationService.DestinationDelete(11);
+                 System.out.println("Destino eliminado sactisfactoriamente");
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 
@@ -178,13 +177,23 @@ class DestinationTest {
 		}
 		@Test
 		@Transactional
-		void buscarPorCode(){
+		void buscarPorCode() {
 			try {
 				destination = destynationService.findByCode(" ");
 				System.out.println(destination.getName());
-			}catch (Exception e){
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+		}
+            @Test
+			@Transactional
+			void buscarPorId(){
+				try {
+					destination = destynationService.findById(6);
+					System.out.println("El destino que se encontro es: " + destination.getName());
+				}catch (Exception e){
+					System.out.println(e.getMessage());
+				}
 		}
 	}
 

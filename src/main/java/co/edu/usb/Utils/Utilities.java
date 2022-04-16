@@ -506,6 +506,15 @@ public class Utilities {
 		return esEnt;
 
 	}
+	public static boolean isSpecialCaracter(String word) {
+		boolean ret = false;
+		Pattern pat = Pattern.compile("[!@#$&*.;()_+=|<>?{}\\\\[\\\\]~-]");
+		Matcher matSpecial = pat.matcher(word);
+		if (matSpecial.find()) {
+			ret = true;
+		}
+		return ret;
+	}
 	
 
 }

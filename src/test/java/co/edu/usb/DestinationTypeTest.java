@@ -49,10 +49,15 @@ class DestinationTypeTest {
 	@Transactional
 	void buscarDestinationTypeCodeAndStatus() throws Exception {
 
+try {
+	DestinationType destinationType = destynationTypeService.findByCodeAndStatus("3883", "A");
 
-		DestinationType destinationType = destynationTypeService.findByCodeAndStatus("PLAYA", "A");
+	System.out.println(destinationType.getName());
+}catch(Exception e){
 
-		System.out.println(destinationType.getName());
+	System.out.println(e.getMessage());
+		}
+
 
 	}
 

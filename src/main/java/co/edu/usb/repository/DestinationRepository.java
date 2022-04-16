@@ -10,12 +10,12 @@ import co.edu.usb.domain.Destination;
 
 public interface DestinationRepository extends JpaRepository<Destination, Integer>{
 	
-	public List<Destination> findByCodeAndStatus(String code, String status) throws SQLException;
+	public List<Destination> findByCodeAndStatus(String code, String status) throws Exception;
 
 	
 	public List<Destination> findByDestinationType_Code (String Code) throws SQLException;
 	
-	public List<Destination> findByStatus (String status);
+	public List<Destination> findByStatus (String status) throws  Exception;
 
 	public Destination findByCode (String Code) throws Exception;
 

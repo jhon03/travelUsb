@@ -8,7 +8,7 @@ import java.util.List;
 import co.edu.usb.DTO.DestinationDTO;
 import co.edu.usb.Service.DestynationService;
 
-import co.edu.usb.Utilities.Constantes;
+import co.edu.usb.Utils.Constantes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +36,7 @@ class DestinationTest {
 
 		try {
 
-			List<Destination> destination = destinationRepository.findByCodeAndStatus("BOSQU", "A");
+			List<Destination> destination = destynationService.findByCodeAndStatus("PLAYA", Constantes.Activo);
 			for (Destination item : destination) {
 				System.out.println(item.getName());
 			}
@@ -55,7 +55,7 @@ class DestinationTest {
 		List<Destination> lstDestination = null;
 		try {
 
-			lstDestination = destinationRepository.findByDestinationType_Code("PLAYA");
+			lstDestination = destynationService.findByDestinationType_Code("PLAYA");
 
 			for (Destination destination : lstDestination) {
 				System.out.println(destination.getCode() + " - " + destination.getName());
@@ -75,7 +75,7 @@ class DestinationTest {
 
 		try {
 
-			lstDestination = destinationRepository.findByStatus("A");
+			lstDestination = destynationService.findByStatus(Constantes.Activo);
 			for (Destination item : lstDestination) {
 				System.out.println(item.getName() + " - " + item.getCode());
 			}
@@ -90,12 +90,14 @@ class DestinationTest {
 	@Transactional
      void debeGuardarUnDestino() {
 
+
 		try {
+
 			DestinationDTO destinationDTO = new DestinationDTO();
 
-			destinationDTO.setCode("MEX");
-			destinationDTO.setName("MEXICO");
-			destinationDTO.setDescription("PLAYA, CULTURA Y BRISA");
+			destinationDTO.setCode("ROL");
+			destinationDTO.setName("ROLDANILLO");
+			destinationDTO.setDescription("PLAYA, BRISA Y MAR");
 			destinationDTO.setLand("N");
 			destinationDTO.setAir("S");
 			destinationDTO.setSea("N");
@@ -103,12 +105,15 @@ class DestinationTest {
 
 
 			destinationDTO.setCreatorUser("JHONH");
-			destinationDTO.setModifierUser("CESARL");
+			//destinationDTO.setModifierUser("CESARL");
 
-			destinationDTO.setStatus(Constantes.Activo);
+			destinationDTO.setStatus("A");
 
-			destinationDTO.setCodeDestinationType("PLAYA");
-			destinationDTO.setNameDestinationType("PLAYA Y MAR");
+			//destinationDTO.setCodeDestinationType("PLAYA");
+			//destinationDTO.setNameDestinationType("PLAYA Y MAR");
+			destinationDTO.setCodeDestinationType("BOSQU");
+			destinationDTO.setNameDestinationType("NATURALEZA, BOSQUE Y AIRE");
+
 
 			destynationService.guardarDestination(destinationDTO);
 
@@ -122,29 +127,31 @@ class DestinationTest {
 	    @Transactional
 	   void updateDestino() {
 
-			Destination destination = null;
+			DestinationDTO destination = null;
 
 
 			try {
 				DestinationDTO destinationDTO = new DestinationDTO();
 
-				destinationDTO.setIdDest(7);
-				destinationDTO.setCode("ARM");
-				destinationDTO.setName("ARMENIA");
-				destinationDTO.setDescription("PURE NATURE");
-				destinationDTO.setLand("SS");
+				destinationDTO.setIdDest(9);
+				destinationDTO.setCode("PUT");
+				destinationDTO.setName("PUTUMAYO");
+				destinationDTO.setDescription("AIRE PUROooo");
+				destinationDTO.setLand("S");
 				destinationDTO.setAir("N");
 				destinationDTO.setSea("N");
-				destinationDTO.setDateCreated(new Date());
+                destinationDTO.setDateCreated(new Date());
 				destinationDTO.setDateModified(new Date());
+
 				destinationDTO.setCreatorUser("JHONH");
                 destinationDTO.setModifierUser("JHONH");
-				destinationDTO.setStatus("A");
+				destinationDTO.setStatus(Constantes.Activo);
 
 				destinationDTO.setCodeDestinationType("BOSQU");
 				destinationDTO.setNameDestinationType("NATURALEZA, BOSQUE Y AIRE");
 
 				destynationService.updateDestination(destinationDTO);
+				System.out.println("Update Destination");
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -157,8 +164,8 @@ class DestinationTest {
 
 			try {
 
-				destynationService.DestinationDelete(10);
-
+				destynationService.DestinationDelete(13);
+                 System.out.println("Destino eliminado sactisfactoriamente");
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 
@@ -169,7 +176,7 @@ class DestinationTest {
 	void searchDestinationForId() {
 
 			try {
-				destination = destynationService.findById(6);
+				destination = destynationService.findById(9);
 
 				System.out.println(destination.getName());
 			} catch (Exception e) {
@@ -178,13 +185,25 @@ class DestinationTest {
 		}
 		@Test
 		@Transactional
-		void buscarPorCode(){
+		void buscarPorCode() {
+
+		Destination destination1 = null;
 			try {
-				destination = destynationService.findByCode(" ");
+				destination = destynationService.findByCode("PUT");
 				System.out.println(destination.getName());
-			}catch (Exception e){
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+		}
+            @Test
+			@Transactional
+			void buscarPorId(){
+				try {
+					destination = destynationService.findById(6);
+					System.out.println("El destino que se encontro es: " + destination.getName());
+				}catch (Exception e){
+					System.out.println(e.getMessage());
+				}
 		}
 	}
 

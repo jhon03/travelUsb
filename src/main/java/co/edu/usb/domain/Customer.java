@@ -11,11 +11,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Data
 @Entity
-@Table (name = "cliente")
+@Table(name = "cliente")
 public class Customer {
 
 	 @Id

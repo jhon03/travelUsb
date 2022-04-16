@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import co.edu.usb.Service.DestynationTypeService;
+import co.edu.usb.Utils.Constantes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,10 +28,11 @@ class DestinationTypeTest {
 	
 	@Test
 	@Transactional
-	void findDestinationTypesByCode() {
+	void findDestinationTypes() {
 		
 	List<DestinationType> lstDestinationTypeRepository = destinationTypeRepository.findAll();
-	
+
+
 	for(DestinationType dato:lstDestinationTypeRepository) {
 		System.out.println(dato.getName());
 	}
@@ -39,7 +41,7 @@ class DestinationTypeTest {
 	@Transactional
 	void searchDestinationTypeOrderAsc() throws SQLException {
 
-		List<DestinationType> lstDestinationTypes = destinationTypeRepository.findByStatusOrderByCodeAsc("A");
+		List<DestinationType> lstDestinationTypes = destynationTypeService.findByStatusOrderByCodeAsc(Constantes.Activo);
 
 		for (DestinationType typeDestino : lstDestinationTypes) {
 			System.out.println(typeDestino.getCode());
@@ -49,10 +51,15 @@ class DestinationTypeTest {
 	@Transactional
 	void buscarDestinationTypeCodeAndStatus() throws Exception {
 
+try {
+	DestinationType destinationType = destynationTypeService.findByCodeAndStatus("PLAYA", "A");
 
-		DestinationType destinationType = destynationTypeService.findByCodeAndStatus("PLAYA", "A");
+	System.out.println(destinationType.getName());
+}catch(Exception e){
 
-		System.out.println(destinationType.getName());
+	System.out.println(e.getMessage());
+		}
+
 
 	}
 

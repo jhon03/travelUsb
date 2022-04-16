@@ -26,7 +26,7 @@ public interface CustomerService {
      * @return customer
      * restricción: ignorar mayúsculas y minúsculas
      */
-    public Customer findByEmailIgnoreCase(String email);
+    public Customer findByEmailIgnoreCase(String email) throws Exception;
 
     /**
      *
@@ -34,7 +34,7 @@ public interface CustomerService {
      * @return customer
      * Usando LIKE
      */
-    public Customer findByIdentificationNumberLike(String identificationNumber);
+    public Customer findByIdentificationNumberLike(String identificationNumber) throws Exception;
 
     /**
      *
@@ -42,7 +42,7 @@ public interface CustomerService {
      * @return Customer
      * Restricción: ignorar mayúsculas y minúsculas usando LIKE
      */
-    public Customer findByNameIgnoreCaseLike(String name);
+    public Customer findByNameIgnoreCaseLike(String name) throws Exception;
 
 
     /**
@@ -53,7 +53,7 @@ public interface CustomerService {
      * @throws SQLException
      * consultar clientes por fecha de nacimiento en un periodo dado
      */
-    public List<Customer> findBybirthDateBetween(Date fechaInicio, Date fechaFin) throws SQLException;
+    public List<Customer> findBybirthDateBetween(Date fechaInicio, Date fechaFin) throws Exception;
 
     /**
      *
@@ -61,7 +61,7 @@ public interface CustomerService {
      * @return contidad clientes
      * @throws SQLException
      */
-    long countAndfindByStatus(String status) throws SQLException;
+    long countAndfindByStatus(String status) throws Exception;
 
 
     /**
@@ -72,7 +72,7 @@ public interface CustomerService {
      * @throws SQLException
      * consultar clientes por codigo de tipo de identificación paginada.
      */
-    Page<Customer> findByIdentificationType_Code(String code, Pageable pageable) throws SQLException;
+    Page<Customer> findByIdentificationType_Code(String code, Pageable pageable) throws Exception;
 
 
     /**
@@ -80,7 +80,7 @@ public interface CustomerService {
      * @param firstName
      * @param SecondName
      * @return List customers
-     * @throws SQLException
+     * @throws Exception
      */
-    public List<Customer> findByFirstNameAndSecondName(String firstName, String SecondName) throws SQLException;
+    public List<Customer> findByFirstNameAndSecondName(String firstName, String SecondName) throws Exception;
 }

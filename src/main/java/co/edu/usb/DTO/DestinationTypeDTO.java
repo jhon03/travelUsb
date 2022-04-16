@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
+
 public class DestinationTypeDTO implements Serializable {
 
     private Integer idTyde;

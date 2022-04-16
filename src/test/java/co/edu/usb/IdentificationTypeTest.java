@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-
+import co.edu.usb.Service.IdentificationTypeService;
+import co.edu.usb.Utils.Constantes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,16 +23,19 @@ import co.edu.usb.repository.IdentificationTypeRepository;
 class IdentificationTypeTest {
 
 	@Autowired
-	private IdentificationTypeRepository identificationTypeRepository; 
+	private IdentificationTypeRepository identificationTypeRepository;
+
+	@Autowired
+	private IdentificationTypeService identificationTypeService;
 	
 	
 	@Test
 	@Transactional
-    void searchforIdentificationTypesByStatusOrderAsc()  {
+    void searchforIdentificationTypesByStatusOrderAsc()  throws Exception{
 		
 		try {
 			
-			List<IdentificationType> lstIdentificationTypeRepos = identificationTypeRepository.findByStatusOrderByCodeAsc("A");
+			List<IdentificationType> lstIdentificationTypeRepos = identificationTypeService.findByStatusOrderByCodeAsc("AA");
 			
 			for(IdentificationType tiid:lstIdentificationTypeRepos) {
 				System.out.println(tiid.getCode());
@@ -45,10 +49,10 @@ class IdentificationTypeTest {
 	}
 		@Test
 		@Transactional
-		void searchIdentificationTypeForCodeAndStatus() throws SQLException {
+		void searchIdentificationTypeForCodeAndStatus() throws Exception {
 			
 		try {
-			IdentificationType identificationType = identificationTypeRepository.findByCodeAndStatus("CC", "A");
+			IdentificationType identificationType = identificationTypeService.findByCodeAndStatus("CC", Constantes.Activo);
 		
             System.out.println(identificationType.getName());
 			

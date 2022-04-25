@@ -22,6 +22,7 @@ public class DestinationDTO implements Serializable {
     private String status;
 
     private Integer idTyde;
-    private String nameDestinationType;
+
     private String CodeDestinationType;
+    private String nameDestinationType;
 }

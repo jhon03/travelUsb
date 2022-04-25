@@ -95,11 +95,11 @@ class DestinationTest {
 
 			DestinationDTO destinationDTO = new DestinationDTO();
 
-			destinationDTO.setCode("ROL");
-			destinationDTO.setName("ROLDANILLO");
-			destinationDTO.setDescription("PLAYA, BRISA Y MAR");
-			destinationDTO.setLand("N");
-			destinationDTO.setAir("S");
+			destinationDTO.setCode("ARM");
+			destinationDTO.setName("ARMENIA");
+			destinationDTO.setDescription("TIERRA DE CAFE");
+			destinationDTO.setLand("S");
+			destinationDTO.setAir("N");
 			destinationDTO.setSea("N");
 			destinationDTO.setDateCreated(new Date());
 
@@ -111,8 +111,8 @@ class DestinationTest {
 
 			//destinationDTO.setCodeDestinationType("PLAYA");
 			//destinationDTO.setNameDestinationType("PLAYA Y MAR");
-			destinationDTO.setCodeDestinationType("BOSQU");
-			destinationDTO.setNameDestinationType("NATURALEZA, BOSQUE Y AIRE");
+			destinationDTO.setCodeDestinationType("CULTU");
+			destinationDTO.setNameDestinationType("CULTURAL");
 
 
 			destynationService.guardarDestination(destinationDTO);
